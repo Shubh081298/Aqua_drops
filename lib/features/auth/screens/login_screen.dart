@@ -120,7 +120,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   const Icon(Icons.water_drop, size: 64, color: Color(0xFF1769AA)),
                   const SizedBox(height: 14),
                   const Text(
-                    'Aqua Drops',
+                    'Water Level Monitor',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,

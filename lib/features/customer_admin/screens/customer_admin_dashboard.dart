@@ -54,7 +54,7 @@ class _CustomerAdminDashboardState extends ConsumerState<CustomerAdminDashboard>
             child: Image.asset('assets/images/aqua_drops_logo.png', height: 30, width: 30, fit: BoxFit.cover),
           ),
           const SizedBox(width: 8),
-          const Text('Aqua Drops', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+          const Text('Water Level Monitor', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
           const SizedBox(width: 8),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),

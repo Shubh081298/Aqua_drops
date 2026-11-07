@@ -6,6 +6,7 @@ import 'features/auth/screens/login_screen.dart';
 import 'features/auth/screens/splash_screen.dart';
 import 'features/super_admin/screens/super_admin_dashboard.dart';
 import 'features/customer_admin/screens/customer_admin_dashboard.dart';
+import 'features/user/screens/user_dashboard.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -26,7 +27,7 @@ class WaterMonitorApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Aqua Drops',
+      title: 'Water Level Monitor',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1769AA)),
@@ -38,28 +39,9 @@ class WaterMonitorApp extends StatelessWidget {
         '/login':         (_) => const LoginScreen(),
         '/super-admin':   (_) => const SuperAdminDashboard(),
         '/customer-admin':(_) => const CustomerAdminDashboard(),
-        '/home':          (_) => const _PlaceholderScreen(title: 'My Tank'),
+        '/home':          (_) => const UserDashboard(),
       },
     );
   }
 }
 
-class _PlaceholderScreen extends StatelessWidget {
-  const _PlaceholderScreen({required this.title});
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        backgroundColor: const Color(0xFF1769AA),
-        foregroundColor: Colors.white,
-      ),
-      body: Center(
-        child: Text(title,
-          style: const TextStyle(fontSize: 20, color: Color(0xFF172B4D))),
-      ),
-    );
-  }
-}

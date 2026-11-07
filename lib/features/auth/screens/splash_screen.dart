@@ -62,7 +62,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             Icon(Icons.water_drop, size: 80, color: Color(0xFF1769AA)),
             SizedBox(height: 20),
             Text(
-              'Aqua Drops',
+              'Water Level Monitor',
               style: TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.bold,
