@@ -45,6 +45,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       final route = switch (role) {
         'super_admin'    => '/super-admin',
         'customer_admin' => '/customer-admin',
+        'customer_user'  => '/home',
         _                => '/home',
       };
       Navigator.pushReplacementNamed(context, route);

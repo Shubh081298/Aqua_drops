@@ -92,17 +92,37 @@ class _UserDashboardState extends ConsumerState<UserDashboard>
       ),
       error: (e, _) => _errorView(e.toString()),
       data: (status) {
-        final level       = status?.waterLevelPercent ?? 0;
-        final isValid     = status?.levelValidity == 'valid';
-        final isOnline    = status?.isOnline ?? false;
-        final motorState  = status?.motorState ?? 'unknown';
-        final motorMode   = status?.motorMode  ?? 'auto';
-        final inletFlow   = status?.inletFlowDetected ?? false;
-        final alertCount  = status?.activeAlertCount  ?? 0;
-        final currentAmps = status?.motorCurrentAmps;
-        final confirmed   = status?.motorConfirmedRunning ?? false;
-        final lastSeen    = status?.lastSeenAt;
-        final isStale     = status?.isStale ?? true;
+        if (status == null) {
+          return Scaffold(
+            backgroundColor: _bg,
+            appBar: _appBar(deviceName, 0, false),
+            body: Center(
+              child: Container(
+                padding: const EdgeInsets.all(24),
+                child: const Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Icon(Icons.wifi_off, size: 48, color: Color(0xFFB0BAC9)),
+                  SizedBox(height: 12),
+                  Text('Waiting for first reading...',
+                      style: TextStyle(fontSize: 16, color: Color(0xFF718096))),
+                  SizedBox(height: 8),
+                  Text('Hub will connect once powered on.',
+                      style: TextStyle(fontSize: 13, color: Color(0xFFB0BAC9))),
+                ]),
+              ),
+            ),
+          );
+        }
+        final level       = status.waterLevelPercent;
+        final isValid     = status.levelValidity == 'valid';
+        final isOnline    = status.isOnline;
+        final motorState  = status.motorState;
+        final motorMode   = status.motorMode;
+        final inletFlow   = status.inletFlowDetected;
+        final alertCount  = status.activeAlertCount;
+        final currentAmps = status.motorCurrentAmps;
+        final confirmed   = status.motorConfirmedRunning;
+        final lastSeen    = status.lastSeenAt;
+        final isStale     = status.isStale;
 
         return Scaffold(
           backgroundColor: _bg,

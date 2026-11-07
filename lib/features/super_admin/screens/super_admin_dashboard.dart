@@ -62,9 +62,10 @@ class _SuperAdminDashboardState extends ConsumerState<SuperAdminDashboard> {
     automaticallyImplyLeading: false,
     titleSpacing: 16,
     title: Row(children: [
-      ClipRRect(
-        borderRadius: BorderRadius.circular(6),
-        child: Image.asset('assets/images/aqua_drops_logo.png', height: 32, width: 32, fit: BoxFit.cover),
+      Container(
+        width: 32, height: 32,
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
+        child: const Icon(Icons.water_drop, color: Color(0xFF1769AA), size: 20),
       ),
       const SizedBox(width: 8),
       const Text('Water Level Monitor', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
