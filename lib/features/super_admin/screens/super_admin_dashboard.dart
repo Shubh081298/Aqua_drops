@@ -247,29 +247,58 @@ class _SystemOverviewCard extends StatelessWidget {
     return _Card(
       title: 'System Overview',
       child: SizedBox(
-        height: 220,
+        height: 200,
         child: total == 0
             ? const Center(child: Text('No devices yet', style: TextStyle(color: _textGrey)))
-            : Stack(alignment: Alignment.center, children: [
-                PieChart(PieChartData(
-                  sectionsSpace: 2,
-                  centerSpaceRadius: 60,
-                  sections: [
-                    PieChartSectionData(value: online.toDouble(), color: _success, title: '', radius: 28),
-                    PieChartSectionData(value: offline == 0 ? 0.001 : offline.toDouble(), color: _warning, title: '', radius: 28),
+            : Row(children: [
+                // Donut chart — fixed 160px
+                SizedBox(
+                  width: 160, height: 160,
+                  child: Stack(alignment: Alignment.center, children: [
+                    PieChart(PieChartData(
+                      sectionsSpace: 2,
+                      centerSpaceRadius: 50,
+                      sections: [
+                        PieChartSectionData(value: online.toDouble(), color: _success, title: '', radius: 24),
+                        PieChartSectionData(value: offline == 0 ? 0.001 : offline.toDouble(), color: _warning, title: '', radius: 24),
+                      ],
+                    )),
+                    Column(mainAxisSize: MainAxisSize.min, children: [
+                      Text('$pct%', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: _textDark)),
+                      const Text('Online', style: TextStyle(fontSize: 11, color: _textGrey)),
+                    ]),
+                  ]),
+                ),
+                const SizedBox(width: 20),
+                // Stats on the right
+                Expanded(child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('$pct% Online',
+                        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: _textDark)),
+                    const SizedBox(height: 16),
+                    Row(children: [
+                      Container(width: 10, height: 10, decoration: const BoxDecoration(color: _success, shape: BoxShape.circle)),
+                      const SizedBox(width: 8),
+                      Text('Online: $online devices', style: const TextStyle(fontSize: 13, color: _textGrey)),
+                    ]),
+                    const SizedBox(height: 8),
+                    Row(children: [
+                      Container(width: 10, height: 10, decoration: const BoxDecoration(color: _warning, shape: BoxShape.circle)),
+                      const SizedBox(width: 8),
+                      Text('Offline: $offline devices', style: const TextStyle(fontSize: 13, color: _textGrey)),
+                    ]),
+                    const SizedBox(height: 8),
+                    Row(children: [
+                      Container(width: 10, height: 10, decoration: const BoxDecoration(color: _border, shape: BoxShape.circle)),
+                      const SizedBox(width: 8),
+                      Text('Total: $total devices', style: const TextStyle(fontSize: 13, color: _textGrey)),
+                    ]),
                   ],
                 )),
-                Column(mainAxisSize: MainAxisSize.min, children: [
-                  Text('$pct%', style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: _textDark)),
-                  const Text('Online', style: TextStyle(fontSize: 12, color: _textGrey)),
-                ]),
               ]),
       ),
-      footer: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        _Legend(color: _success, label: 'Online ($online)'),
-        const SizedBox(width: 20),
-        _Legend(color: _warning, label: 'Offline ($offline)'),
-      ]),
     );
   }
 }
@@ -287,9 +316,9 @@ class _ActivityChartCard extends StatelessWidget {
     return _Card(
       title: 'Device Activity — Last 24 hrs',
       child: SizedBox(
-        height: 220,
+        height: 200,
         child: Padding(
-          padding: const EdgeInsets.only(right: 12, top: 8),
+          padding: const EdgeInsets.only(right: 8, top: 4, bottom: 4),
           child: LineChart(LineChartData(
             gridData: FlGridData(
               show: true,
@@ -308,8 +337,8 @@ class _ActivityChartCard extends StatelessWidget {
             ),
             borderData: FlBorderData(show: false),
             lineBarsData: [
-              LineChartBarData(spots: onlineSpots,  color: _primary,  isCurved: true, barWidth: 2.5, dotData: const FlDotData(show: false), belowBarData: BarAreaData(show: true, color: _primary.withValues(alpha: 0.08))),
-              LineChartBarData(spots: offlineSpots, color: _warning, isCurved: true, barWidth: 2.5, dotData: const FlDotData(show: false), belowBarData: BarAreaData(show: true, color: _warning.withValues(alpha: 0.08))),
+              LineChartBarData(spots: onlineSpots,  color: _primary,  isCurved: true, curveSmoothness: 0.4, barWidth: 3, dotData: const FlDotData(show: false), belowBarData: BarAreaData(show: true, color: _primary.withValues(alpha: 0.08))),
+              LineChartBarData(spots: offlineSpots, color: _warning, isCurved: true, curveSmoothness: 0.4, barWidth: 3, dotData: const FlDotData(show: false), belowBarData: BarAreaData(show: true, color: _warning.withValues(alpha: 0.08))),
             ],
           )),
         ),
